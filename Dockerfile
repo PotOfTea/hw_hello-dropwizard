@@ -1,7 +1,9 @@
 FROM maven:3.5.4-jdk-8-alpine as builder
 
-COPY src /tmp/src
 COPY pom.xml /tmp/pom.xml
+RUN mvn verify clean -f /tmp/pom.xml --fail-never
+
+COPY src /tmp/src
 RUN mvn -f /tmp/pom.xml clean package
 
 
